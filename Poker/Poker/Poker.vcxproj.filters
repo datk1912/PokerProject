@@ -18,9 +18,12 @@
     <ClCompile Include="Poker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debug\TypeCard.h">
+    <ClInclude Include="typecard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

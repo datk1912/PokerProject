@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{3C5DF047-CA8C-4BF2-918A-275BFBEAF616}</ProjectGuid>
+    <ProjectGuid>{1EA2B120-A8DA-44CB-A30B-A253B63D8771}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Poker</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
@@ -151,10 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib.cpp" />
     <ClCompile Include="Poker.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debug\TypeCard.h" />
+    <ClInclude Include="typecard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

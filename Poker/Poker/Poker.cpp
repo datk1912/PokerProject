@@ -1,106 +1,73 @@
-#include<iostream>
-#include<cstdlib>
-#include<ctime>
-#include<string>
+#include"typecard.h"
 
-using namespace std;
-
-struct Data
-{
-	int P; // giu vi tri tren bang number va suit
-	string s; // ten cua quan bai
-};
-
-const string number[]{ "Ace","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King" };
-const string suit[]{ "Hearts","Diamonds","Clubs","Spades" };
-
-bool check(int** a, int x) // kiem tra so random co bi trung` khong
-{
-	int s = 0;
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 13; j++)
-			if (x == a[i][j]) s++;
-	if (s <= 1) return 1;
-	return 0;
-}
-
-void shuffleCards(int** deck)
-{
-	int k = 0;
-	srand((int)time(0));
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 13; j++)
-		{
-			do
-			{
-				deck[i][j] = rand() % 52 + 1; // tron bai tu stt 1 -> 52
-			} while (check(deck, deck[i][j]) == 0);
-		}
-}
-
-void deletee(int** deck)
-{
-	for (int i = 0; i < 4; i++)
-		delete[] deck[i];
-	delete[] deck;
-}
-
-void output(Data a[])
-{
-	for (int i = 0; i < 52; i++)
-	{
-		cout << a[i].s << endl;
-	}
-}
-
-void khoitao(Data a[52], string number[], string suit[])
-{
-	int k = 1;
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 13; j++)
-		{
-			a[i * 13 + j].P = k++;
-			a[i * 13 + j].s = number[j] + ' ' + suit[i];
-		}
-	// khoi tao mang bo bai 1 chieu
-}
-
-void sort(Data a[], int** deck)
-{
-	int* c = new int[52];
-	for (int i = 0; i < 4; i++)
-		for (int j = 0; j < 13; j++)
-			c[i * 13 + j] = deck[i][j]; // bien bo bai thanh mang 1 chieu
-
-	for (int i = 0; i < 52; i++)
-		for (int j = 0; j < 52; j++)
-			if (a[j].P == c[i])
-			{
-				swap(a[i], a[j]); // doi struct thanh bo bai da xao tron
-				break;
-			}
-	delete[] c;
-}
-
-void Oneplayer(Data a[])
-{
-
-}
+int Player[10][5];
+Data a[52];
+int po[10];
 
 int main()
 {
 	int** deck;
+	int d;
+	int b, i = 1;
 	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
+	do{
+		cout << "(1) createHandTest" << endl;
+		cout << "(2) Play with 1 player" << endl;
+		cout << "(3) Play with n player" << endl;
+		cout << "quit" << endl;
+		cin >> d;
+		switch (d)
+			{
+				case 1:
+					khoitao(a, deck);
+					output(a);
+					createHandTest(a);
+					break;
 
-	shuffleCards(deck);
-	Data a[52];
+				case 2:
+					do {
+						cout << "So van dau ( > 0) : ";
+						cin >> b;
+					} while (b < 0);
+					do {
+						int** deck;
+						deck = new int*[4];
+						for (int i = 0; i < 4; i++)
+							deck[i] = new int[13];
 
-	khoitao(a, number, suit);
+						khoitao(a, deck);
+						shuffleCards(deck);
+						sort(a, deck);
 
-	sort(a, deck);
-	//output(a);
-	deletee(deck);
-	return 0;
+						cout << "Van thu: " << i << endl;
+						dealingforHand(a, Player[0]);
+						deletee(deck);
+						cout << endl;
+						i++;
+					} while (i != b + 1);
+					break;
+
+				case 3:
+					do {
+						cout << "So van dau ( > 0) : ";
+						cin >> b;
+					} while (b < 0);
+					do {
+						khoitao(a, deck);
+						srand((int)time(0));
+
+						shuffleCards(deck);
+						sort(a, deck);
+
+						cout << "Van thu: " << i << endl;
+						dealingForHands(a, Player);
+						cout << endl;
+						i++;
+					} while (i != b + 1);
+					break;
+			}
+		}while (d < 1 || d > 3);
+		deletee(deck);
 }
