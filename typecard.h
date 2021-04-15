@@ -3,6 +3,7 @@
 #include<ctime>
 #include<math.h>
 #include<string.h>
+#include<string>
 
 using namespace std;
 
@@ -25,17 +26,17 @@ void deletee(int** deck);
 void output(Data a[]);
 void khoitao(Data a[52], int** deck);
 void sort(Data a[], int** deck);
-bool Straight_Flush(int Player[5]);      //Thung pha sanh
-bool Four_of_a_kind(int Player[5]);      //Tứ quý
-bool Fullhouse(int Player[5]);           //Cù l?
+bool Straight_Flush(int Player[5]);       //Thung pha sanh
+bool Four_of_a_kind(int Player[5]);           //Tu quý
+bool Fullhouse(int Player[5]);           //Cù lu
 bool Flush(int Player[5]);               //Thùng
-bool Straight(int Player[5]);            //Sảnh
-bool Three_of_a_kind(int Player[5]);     //Sám cô
-bool TwoPair(int Player[5]);             //Thú
-bool Pair(int Player[5]);                //1 đôi
-int Point(int Player[5]);                //Điểm
+bool Straight(int Player[5]);            //Sanh
+bool Three_of_a_kind(int Player[5]);           //Sám cô
+bool TwoPair(int Player[5]);          //Thú
+bool Pair(int Player[5]);
+int  getStatusOfHand(int Player[5]);
 void dealingforHand(Data a[], int Player[5]);
-void createHandTest(Data a[]);           //Tạo bộ test cho người chơi	
-void dealingForHands(Data a[], int Player[10][5], int n);
-void sortP(int P[], int n, int** Player);
-void dealer(Data a[], int Player[10][5], int n);
+void createHandTest(Data a[]);
+void dealingForHands(Data a[], int Player[10][5]);
+//void sortP(int P[], int n, int** Player);
+void rankingHands(int po[], int n, Data a[]);

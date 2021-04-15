@@ -8,18 +8,18 @@ int main()
 {
 	srand((int)time(0));
 	int** deck;
-	deck = new int* [4];
+	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int display, b, point = 0;
 	char y;
-	deck = new int* [4];
+	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int i = 0;
-	do 
+	do
 	{
-		do 
+		do
 		{
 			cout << "=================================================== POKER ==============================================================" << endl;
 			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
@@ -48,7 +48,7 @@ int main()
 				} while (y == 'y');
 				break;
 
-			case 2: 
+			case 2:
 
 				do
 				{
@@ -68,19 +68,34 @@ int main()
 					switch (display_2)
 					{
 					case 1:                           //Chơi 1 mình ( so lonely :(((((( )
-						khoitao(a, deck);
-						shuffleCards(deck);
-						sort(a, deck);
-						dealingforHand(a, Player[0]);
-						cout << endl;
+						i = 1;
+						do
+						{
+							cout << "So van dau ( > 0) : ";
+							cin >> b;
+							cout << endl;
+						} while (b < 0);
+
+						do
+						{
+							khoitao(a, deck);
+							shuffleCards(deck);
+							sort(a, deck);
+
+							cout << "Van thu: " << i << endl;
+							dealingforHand(a, Player[0]);
+
+							cout << endl;
+
+							point += getStatusOfHand(Player[0]);
+							if (i == b)
+								cout << "Diem tong cua ban la : " << point << endl;
+							cout << endl;
+							i++;
+						} while (i != b + 1);
 						break;
-					case 2:                           //Chơi 1 mình ( so lonely again :(((((( )
-						system("cls");
-						khoitao(a, deck);
-						shuffleCards(deck);
-						sort(a, deck);
-						dealer(a, Player, 2);
-						break;
+						//case 2:                        //Chơi 1 mình ( so lonely again :(((((( )
+							//break;
 					}
 					cout << " - Do you want play again? (y/n)" << endl;
 					cin >> y;
@@ -104,20 +119,13 @@ int main()
 						cin >> display_3;
 					} while (display_3 != 1 && display != 2);
 
-					int n;
-					do
-					{
-						cout << " - input the number of player(2-10): ";
-						cin >> n;
-					} while (n < 2 || n > 10);
-
 					switch (display_3)
 					{
 					case 1:                                   //Chơi k có dealer
 						i = 1;
 						do
 						{
-							cout << "- So van dau ( > 0) : " << endl;
+							cout << "So van dau ( > 0) : ";
 							cin >> b;
 						} while (b < 0);
 
@@ -128,8 +136,8 @@ int main()
 							shuffleCards(deck);
 							sort(a, deck);
 
-							cout << "-- Van thu: " << i << " --"<< endl;
-							dealingForHands(a, Player, n);
+							cout << "Van thu: " << i << endl;
+							dealingForHands(a, Player);
 							cout << endl;
 							i++;
 						} while (i != b + 1);
@@ -142,8 +150,8 @@ int main()
 
 			}
 
-		} while (display < 1 || display > 4 );
-		
+		} while (display < 1 || display > 4);
+
 		system("cls");
 
 		if (display == 4)
@@ -152,10 +160,9 @@ int main()
 			break;
 		}
 
-		system("cls");
 		cout << "=================================================== POKER ==============================================================" << endl;
 		cout << "=================================================Kha Vinh Dat===========================================================" << endl;
-		cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+		cout << "=============================================== Nguyen Quoc Su ==============================================================" << endl;
 		cout << " - Do you want go to menu ? (y/n)" << endl;
 		cin >> y;
 
