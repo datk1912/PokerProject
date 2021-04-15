@@ -3,6 +3,7 @@
 #include<ctime>
 #include<math.h>
 #include<string.h>
+#include<string>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ struct Data
 	string s;
 };
 
-extern int Player[10][5];
+extern int Player[10][8];
 extern Data a[52];
 extern int po[10];
 
@@ -26,10 +27,10 @@ void output(Data a[]);
 void khoitao(Data a[52], int** deck);
 void sort(Data a[], int** deck);
 bool Straight_Flush(int Player[5]);       //Thung pha sanh
-bool Four_of_a_kind(int Player[5]);           //T? quý
-bool Fullhouse(int Player[5]);           //Cù l?
+bool Four_of_a_kind(int Player[5]);           //Tu quý
+bool Fullhouse(int Player[5]);           //Cù lu
 bool Flush(int Player[5]);               //Thùng
-bool Straight(int Player[5]);            //S?nh
+bool Straight(int Player[5]);            //Sanh
 bool Three_of_a_kind(int Player[5]);           //Sám cô
 bool TwoPair(int Player[5]);          //Thú
 bool Pair(int Player[5]);

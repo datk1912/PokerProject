@@ -8,18 +8,18 @@ int main()
 {
 	srand((int)time(0));
 	int** deck;
-	deck = new int* [4];
+	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int display, b, point = 0;
 	char y;
-	deck = new int* [4];
+	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int i = 0;
-	do 
+	do
 	{
-		do 
+		do
 		{
 			cout << "=================================================== POKER ==============================================================" << endl;
 			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
@@ -48,7 +48,7 @@ int main()
 				} while (y == 'y');
 				break;
 
-			case 2: 
+			case 2:
 
 				do
 				{
@@ -150,8 +150,8 @@ int main()
 
 			}
 
-		} while (display < 1 || display > 4 );
-		
+		} while (display < 1 || display > 4);
+
 		system("cls");
 
 		if (display == 4)

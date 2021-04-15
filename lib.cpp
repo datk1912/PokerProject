@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const char* number[]{ "A","2","3","4","5","6","7","8","9","10","J","Q","K" };
+const char* number[]{ "2","3","4","5","6","7","8","9","10","J","Q","K","A" };
 const char* suits[] = { "Hearts", "Diamonds", "Clubs", "Spades" };
 
 bool check(int** a, int x)
@@ -76,6 +76,7 @@ void sort(Data a[], int** deck)
 	delete[] c;
 }
 
+//================== kiem tra bai ============================
 
 bool Straight_Flush(int Player[5])       //Thung pha sanh
 {
@@ -114,7 +115,7 @@ bool Four_of_a_kind(int Player[5])            //Tứ quý
 
 bool Fullhouse(int Player[5])           //Cù lũ
 {
-	int c1 = 0, c2 = 0, * c;
+	int c1 = 0, c2 = 0, *c;
 	c = new int[5];
 	for (int i = 0; i < 5; i++)
 		c[i] = Player[i] % 13;
@@ -240,7 +241,9 @@ bool Pair(int Player[5])
 	return 0;
 }
 
-int Point(int Player[5])
+// ======================================================
+
+int Point(int Player[5]) // tinh diem
 {
 	if (Straight_Flush(Player))
 		return 8;
@@ -261,7 +264,7 @@ int Point(int Player[5])
 	return 0;
 }
 
-void dealingforHand(Data a[], int Player[5])
+void dealingforHand(Data a[], int Player[5]) // chia bai cho 1 nguoi
 {
 	for (int i = 0; i < 5; i++)
 		Player[i] = a[i].P;
@@ -273,7 +276,7 @@ void dealingforHand(Data a[], int Player[5])
 	cout << "Diem cua ban la : " << p << endl;
 }
 
-void createHandTest(Data a[])
+void createHandTest(Data a[]) // chon 5 la de kiem tra
 {
 	int t[5];
 	bool fl[52] = { 0 };
@@ -326,6 +329,13 @@ void sortP(int P[], int n)
 	}
 }
 
+void  getStatusOfHand(Data a[], int n, int po[])
+{
+	cout << "player " << n + 1 << " point: " << po[n] << endl;
+	for (int i = 0; i < 5; i++)
+		cout << a[n + i * n].s << "  ";
+}
+
 void dealingForHands(Data a[], int Player[10][5])
 {
 	int n;
@@ -342,9 +352,8 @@ void dealingForHands(Data a[], int Player[10][5])
 
 		po[i] = Point(Player[i]);
 
-		cout << "player " << i + 1 << " point: " << po[i] << endl;
-		for (int j = 0; j < 5; j++)
-			cout << a[i + j * n].s << "  ";
+		getStatusOfHand(a, i, po);
+		
 		cout << endl << endl;
 	}
 	sortP(po, n);
