@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const char* number[]{ "A","2","3","4","5","6","7","8","9","10","J","Q","K" };
+const char* number[]{ "2","3","4","5","6","7","8","9","10","J","Q","K","A" };
 const char* suits[] = { "Hearts", "Diamonds", "Clubs", "Spades" };
 
 bool check(int** a, int x)
@@ -57,7 +57,7 @@ void khoitao(Data a[52], int** deck)
 			a[i * 13 + j].P = k++;
 			s = suits[i];
 			a[i * 13 + j].s = number[j];
-			a[i * 13 + j].s +=' ' + s;
+			a[i * 13 + j].s += " " + s;
 		}
 }
 
@@ -76,8 +76,9 @@ void sort(Data a[], int** deck)
 	delete[] c;
 }
 
+//================== kiem tra bai ============================
 
-bool Straight_Flush(int Player[5])       //Thung pha sanh
+bool isStraightFlush(int Player[5])       //Thung pha sanh
 {
 	int s = Player[0] / 13;
 	for (int i = 1; i < 5; i++)
@@ -97,7 +98,7 @@ bool Straight_Flush(int Player[5])       //Thung pha sanh
 	return 1;
 }
 
-bool Four_of_a_kind(int Player[5])            //Tứ quý
+bool isFourOfAKind(int Player[5])            //Tứ quý
 {
 	int d = 0, max = 0;
 	for (int i = 0; i < 2; i++)
@@ -112,9 +113,9 @@ bool Four_of_a_kind(int Player[5])            //Tứ quý
 	return 0;
 }
 
-bool Fullhouse(int Player[5])           //Cù lũ
+bool isFullHouse(int Player[5])           //Cù lũ
 {
-	int c1 = 0, c2 = 0, * c;
+	int c1 = 0, c2 = 0, *c;
 	c = new int[5];
 	for (int i = 0; i < 5; i++)
 		c[i] = Player[i] % 13;
@@ -133,17 +134,17 @@ bool Fullhouse(int Player[5])           //Cù lũ
 	return 0;
 }
 
-bool Flush(int Player[5])               //Thùng
+bool isFlush(int Player[5])               //Thùng
 {
 	int s = Player[0] / 13;
 	for (int i = 1; i < 5; i++)
 		if (Player[i] / 13 != s) return 0;
 
-	if (!Straight(Player)) return 1;
+	if (!isStraight(Player)) return 1;
 	return 0;
 }
 
-bool Straight(int Player[5])            //Sảnh
+bool isStraight(int Player[5])            //Sảnh
 {
 	int* c = new int[5];
 	for (int i = 0; i < 5; i++)
@@ -164,9 +165,9 @@ bool Straight(int Player[5])            //Sảnh
 	return 1;
 }
 
-bool Three_of_a_kind(int Player[5])           //Sám cô
+bool isThreeOfAKind(int Player[5])           //Sám cô
 {
-	if (Fullhouse(Player)) return 0;
+	if (isFullHouse(Player)) return 0;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -178,7 +179,7 @@ bool Three_of_a_kind(int Player[5])           //Sám cô
 	return 0;
 }
 
-bool TwoPair(int Player[5])          //Thú
+bool isTwoPairs(int Player[5])          //Thú
 {
 	int c1 = 0, c2 = 0;
 	int* c = new int[5];
@@ -229,52 +230,59 @@ bool TwoPair(int Player[5])          //Thú
 	return 1;
 }
 
-bool Pair(int Player[5])
+bool isPair(int Player[5])
 {
 	int count = 0;
 	for (int i = 0; i < 4; i++)
-		if (Player[i] % 13 == Player[i + 1] % 13)
+		for (int j=i+1; j<5; j++)
+		if (Player[i] % 13 == Player[j] % 13)
 			count++;
 	if (count == 1)
 		return 1;
 	return 0;
 }
 
-int Point(int Player[5])
+// ======================================================
+
+int  getStatusOfHand(int Player[5]) // tinh diem
 {
-	if (Straight_Flush(Player))
+	if (isStraightFlush(Player))
 		return 8;
-	if (Four_of_a_kind(Player))
+	if (isFourOfAKind(Player))
 		return 7;
-	if (Fullhouse(Player))
+	if (isFullHouse(Player))
 		return 6;
-	if (Flush(Player))
+	if (isFlush(Player))
 		return 5;
-	if (Straight(Player))
+	if (isStraight(Player))
 		return 4;
-	if (Three_of_a_kind(Player))
+	if (isThreeOfAKind(Player))
 		return 3;
-	if (TwoPair(Player))
+	if (isTwoPairs(Player))
 		return 2;
-	if (Pair(Player))
+	if (isPair(Player))
 		return 1;
 	return 0;
 }
 
-void dealingforHand(Data a[], int Player[5])
+void printHand(Data a[])
+{
+	for (int i = 0; i < 5; i++)
+		cout << a[i].s << " ";
+	cout << endl;
+}
+
+void dealingforHand(Data a[], int Player[5]) // chia bai cho 1 nguoi
 {
 	for (int i = 0; i < 5; i++)
 		Player[i] = a[i].P;
-	cout << " - Bai cua ban:" << endl;
-	cout << endl;
-	for (int i = 0; i < 5; i++)
-		cout << "(" << a[i].s << ")" << " ";
-	cout << endl << endl;
-	int p = Point(Player);
-	cout << " - Diem cua ban la : " << p << endl;
+	cout << "Bai cua ban:" << endl;
+	printHand(a);
+	int p = getStatusOfHand(Player);
+	cout << "Diem cua ban la : " << p << endl;
 }
 
-void createHandTest(Data a[])
+void createHandTest(Data a[]) // chon 5 la de kiem tra
 {
 	int t[5];
 	bool fl[52] = { 0 };
@@ -299,7 +307,7 @@ void createHandTest(Data a[])
 	for (int i = 0; i < 5; i++)
 		cout << a[t[i]].s << " ";
 	cout << endl;
-	int point = Point(t);
+	int point = getStatusOfHand(t);
 	cout << "Diem cua ban la : " << point << endl;
 }
 
@@ -317,7 +325,7 @@ void sortP(int P[], int n)
 				swap(c[i], c[j]);
 			}
 		}
-	if (po[n - 1] == po[0]) cout << "Everyone are Tie!" << endl;
+	if (po[n] == po[0]) cout << "Everyone are Tie!";
 	else
 	{
 		cout << "-- The Winner --" << endl;
@@ -327,73 +335,158 @@ void sortP(int P[], int n)
 	}
 }
 
-void dealingForHands(Data a[], int Player[10][5], int n)
+void rankingHands(int po[], int n,Data a[])
 {
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < 5; j++)
-			Player[i][j] = a[i + j * n].P;
-
-		po[i] = Point(Player[i]);
-		cout << "player " << i + 1 << endl;
-
-		for (int j = 0; j < 5; j++)
-			cout << a[i + j * n].s << "  ";
-
-		cout << endl;
-
-		cout << " point: " << po[i] << endl;
-
-		cout << endl << endl;
-	}
-	sortP(po, n);
-}
-
-void dealer(Data a[], int Player[10][5], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < 5; j++)
-			Player[i][j] = a[i + j * n].P;
-
-		po[i] = Point(Player[i]);
-		if (i == 0)
-			cout << "player " << i + 1 << endl;
-		if (i == 1)
-			cout << "Dealer " << endl;
-		for (int j = 0; j < 5; j++)
-			cout << a[i + j * n].s << "  ";
-
-		cout << endl;
-
-		cout << " point: " << po[i] << endl;
-
-		cout << endl << endl;
-	}
-	int c[10], P[10];
+	int c[10];
 	for (int i = 0; i < n; i++)
 		c[i] = i + 1;
+
 	for (int i = 0; i < n - 1; i++)
 		for (int j = i + 1; j < n; j++)
 		{
-			if (P[i] < P[j])
+			if (po[i] < po[j])
 			{
-				swap(P[i], P[j]);
+				swap(po[i], po[j]);
 				swap(c[i], c[j]);
 			}
 		}
-	if (po[n - 1] == po[0]) cout << "=== Tie! ===" << endl;
-	else
-	{
-		cout << "-- The Winner --" << endl;
-		for (int i = 0; i < n; i++)
-		{
-			if (po[i] == po[0] && c[i] == 1)
-				cout << "player " << c[i] << endl;
-			if (po[i] == po[0] && c[i] == 2)
-				cout << "Dealer" <<endl;
-		}
 
+	int k = 1;
+	cout << "==== top " << k << " ==== " << endl;
+	cout << "player " << c[0] <<": ";
+
+	for (int i = 0; i < 5; i++)
+			cout << a[c[0]-1 + i * n].s << "  ";
+	cout << "- point: " << po[0] << endl;
+
+	for (int i = 1; i < n; i++)
+	{
+		if (po[i] != po[i - 1]) cout << "==== top " << ++k << " ==== " << endl;;
+		cout << "player " << c[i] << ": ";
+
+		for (int j = 0; j < 5; j++)
+			cout << a[c[i]-1 + j * n].s << "  ";
+
+		cout << "- point: " << po[i] << endl;
 	}
+
 }
 
+void dealingForHands(Data a[], int Player[10][5], int am, int *&ans)
+{
+	
+
+	for (int i = 0; i < am; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			Player[i][j] = a[i + j * am].P;
+		}
+		po[i] = getStatusOfHand(Player[i]);
+		
+	}
+	
+	ans = evaluateHands(po, am, ans);
+	rankingHands(po, am, a);
+}
+
+int getHighestCard(int Player[5])
+{
+	int max = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		if (Player[i] % 13 < max) max = Player[i];
+	}
+	return max;
+}
+
+int* evaluateHands(int po[],int n,int *&a)
+{
+	for (int i = 0; i < n; i++)
+		a[i] += po[i];
+	return a;
+}
+
+int checkbai(int Player[8],int n)
+{
+	int max=0, a[5];
+	for (int i1=0; i1<n-5+1; i1++)
+		for (int i2=i1+1; i2<n-5+2; i2++)
+			for (int i3=i2+1; i3<n-5+3; i3++)
+				for (int i4=i3+1; i4<n-5+4; i4++)
+					for (int i5 = i4 + 1; i5 < n - 5 + 5; i5++)
+					{
+						a[0] = Player[i1]; a[1] = Player[i2]; a[2] = Player[i3]; a[3] = Player[i4]; a[4] = Player[i5];
+						if (max < getStatusOfHand(a)) max = getStatusOfHand(a);
+					}
+	return max;
+}
+
+
+
+void dealer(Data a[], int Dealer[8], int Player[5][8], int n,int level)
+{
+	int nP=5, nD=5;
+	if (level == 1) nP = 8;
+	else if (level == 3) nD = 8;
+		for (int i = 0; i < n - 1; i++)
+		{
+			for (int j = 0; j < nP; j++)
+				Player[i][j] = a[i + j * n].P;
+			po[i] = checkbai(Player[i],nP);
+		}
+
+		for (int i = 0; i < nD; i++)
+			Dealer[i] = a[n-1 + i * n].P;
+		po[n-1] = checkbai(Dealer,nD);
+
+		int c[10];
+		for (int i = 0; i < n; i++)
+			c[i] = i + 1;
+
+		for (int i = 0; i < n; i++)
+		{
+			if (i != n - 1)
+			{
+				cout << "Player " << i + 1 << endl;
+				for (int j = 0; j < nP; j++)
+					cout << a[i + j * n].s << " ";
+				cout << endl;
+				cout << "point : " << po[c[i] - 1] << endl << endl;
+			}
+			else
+			{
+				cout << "Dealer " << endl;
+				for (int j = 0; j < nD; j++)
+					cout << a[i + j * n].s << " ";
+				cout << endl;
+				cout << "point : " << po[i] << endl << endl;
+			}
+		}
+
+		for (int i = 0; i < n - 1; i++)
+			for (int j = i + 1; j < n; j++)
+			{
+				if (po[i] < po[j])
+				{
+					swap(po[i], po[j]);
+					swap(c[i], c[j]);
+				}
+			}
+
+		
+
+		if (po[n-1] == po[0]) cout << "===== Tie! =====" << endl;
+		else
+		{
+			cout << "===== The Winner =====" << endl;
+
+			for (int i = 0; i < n; i++)
+				if (po[i] == po[0])
+					if (c[i] == n) cout << "- Dealer" << endl;
+					else cout << "- Player " << c[i] << endl;
+						
+		}
+		cout << endl;
+		
+}
