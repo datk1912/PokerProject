@@ -3,7 +3,7 @@
 using namespace std;
 
 const char* number[]{ "2","3","4","5","6","7","8","9","10","J","Q","K","A" };
-const char* suits[] = { "Hearts", "Diamonds", "Clubs", "Spades" };
+const char* suits[] = { "\3", "\4", "\5", "\6" };
 
 bool check(int** a, int x)
 {
@@ -57,7 +57,7 @@ void khoitao(Data a[52], int** deck)
 			a[i * 13 + j].P = k++;
 			s = suits[i];
 			a[i * 13 + j].s = number[j];
-			a[i * 13 + j].s += " " + s;
+			a[i * 13 + j].s += s;
 		}
 }
 
@@ -280,6 +280,7 @@ void dealingforHand(Data a[], int Player[5]) // chia bai cho 1 nguoi
 	printHand(a);
 	int p = getStatusOfHand(Player);
 	cout << "Diem cua ban la : " << p << endl;
+
 }
 
 void createHandTest(Data a[]) // chon 5 la de kiem tra
@@ -291,14 +292,14 @@ void createHandTest(Data a[]) // chon 5 la de kiem tra
 	for (int i = 0; i < 5; i++)
 		while (true)
 		{
-			cout << "card " << i << ": ";
+			cout << "card " << i+1 << ": ";
 			cin >> t[i];
 			if (fl[t[i]] == 0)
 			{
 				fl[t[i]] = 1;
 				break;
 			}
-			else if (fl[t[i]] == 1 || t[i] > 51 || t[i] < 1) cout << "card " << i << " error!" << endl;
+			else if (fl[t[i]] == 1 || t[i] > 51 || t[i] < 1) cout << "card " << i+1 << " error!" << endl;
 
 		}
 
@@ -311,29 +312,7 @@ void createHandTest(Data a[]) // chon 5 la de kiem tra
 	cout << "Diem cua ban la : " << point << endl;
 }
 
-void sortP(int P[], int n)
-{
-	int c[10];
-	for (int i = 0; i < n; i++)
-		c[i] = i + 1;
-	for (int i = 0; i < n - 1; i++)
-		for (int j = i + 1; j < n; j++)
-		{
-			if (P[i] < P[j])
-			{
-				swap(P[i], P[j]);
-				swap(c[i], c[j]);
-			}
-		}
-	if (po[n] == po[0]) cout << "Everyone are Tie!";
-	else
-	{
-		cout << "-- The Winner --" << endl;
-		for (int i = 0; i < n; i++)
-			if (po[i] == po[0]) cout << "player " << c[i] << endl;
 
-	}
-}
 
 void rankingHands(int po[], int n,Data a[])
 {

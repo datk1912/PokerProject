@@ -9,6 +9,7 @@ int Dealer[8];
 int main()
 {
 	srand((int)time(0));
+//	system("color 12");
 	int** deck;
 	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
@@ -26,11 +27,15 @@ int main()
 			cout << "=================================================== POKER ==============================================================" << endl;
 			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
 			cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
-			cout << "\t\t\t\t\t  (1) create Hand Test" << endl;
-			cout << "\t\t\t\t\t  (2) Play with 1 player" << endl;
-			cout << "\t\t\t\t\t  (3) Play with n player" << endl;
-			cout << "\t\t\t\t\t  (4) Play with Dealer" << endl;
-			cout << "\t\t\t\t\t  (5) Quit" << endl;
+			cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+			cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
+			cout << "\t\t\t\t\t  ==============================" << endl;
+			cout << "\t\t\t\t\t  | (1) create Hand Test       |" << endl;
+			cout << "\t\t\t\t\t  | (2) Play with 1 player     |" << endl;
+			cout << "\t\t\t\t\t  | (3) Play with n player     |" << endl;
+			cout << "\t\t\t\t\t  | (4) Play with Dealer       |" << endl;
+			cout << "\t\t\t\t\t  | (5) Quit                   |"<< endl;
+			cout << "\t\t\t\t\t  ==============================" << endl;
 			cin >> display;
 			switch (display)
 			{
@@ -42,11 +47,16 @@ int main()
 					cout << "=================================================== POKER ==============================================================" << endl;
 					cout << "=================================================Kha Vinh Dat===========================================================" << endl;
 					cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
+					
 					khoitao(a, deck);
 					output(a);
 					createHandTest(a);
 					cout << endl;
-					cout << " - Do you want play again? (y/n)" << endl;
+					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t  =================================" << endl;
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -59,6 +69,8 @@ int main()
 					cout << "=================================================== POKER ==============================================================" << endl;
 					cout << "=================================================Kha Vinh Dat===========================================================" << endl;
 					cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					//Chơi 1 mình ( so lonely :(((((( )
 					khoitao(a, deck);
 					shuffleCards(deck);
@@ -66,7 +78,9 @@ int main()
 					dealingforHand(a, Player[0]);
 					cout << endl;
 
-					cout << " - Do you want play again? (y/n)" << endl;
+					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t  =================================" << endl;
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -76,6 +90,8 @@ int main()
 				do
 				{
 					system("cls");
+					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					i = 1;
 					do
 					{
@@ -115,7 +131,9 @@ int main()
 
 					delete[] ans;
 
-					cout << " - Do you want play again? (y/n)" << endl;
+					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t  =================================" << endl;
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -126,6 +144,8 @@ int main()
 					do
 					{
 						system("cls");
+						cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+						cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 						cout << "Input the level of game: " << endl;
 						cout << "(1). Easy" << endl;
 						cout << "(2). Normal" << endl;
@@ -143,11 +163,16 @@ int main()
 					int m;
 					do
 					{
-						cout << "Enter the number players(1-5): "; cin >> m;
+						cout << "\t ===============================" << endl;
+						cout << "\t  Enter the number players(1-5): " << endl; 
+						cout << "\t ===============================" << endl;
+						cin >> m;
 					} while (m > 5 || m < 1);
 					system("cls");
 					dealer(a, Dealer, PlayerD, m+1,level);
-					cout << " - Do you want play again? (y/n)" << endl;
+					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t  =================================" << endl;
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -164,7 +189,9 @@ int main()
 			cout << "=================================================== POKER ==============================================================" << endl;
 			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
 			cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+			cout << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 			cout << " - Do you want go to menu ? (y/n)" << endl;
+			cout << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 			cin >> y;
 
 			if (y != 'y')
