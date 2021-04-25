@@ -8,35 +8,53 @@ int Dealer[8];
 
 int main()
 {
+	DisableResizeWindow();
+	ShowScrollbar(0);
+	ShowCur(0);
 	srand((int)time(0));
-//	system("color 12");
 	int** deck;
 	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
-	int display, b, point = 0;
+	int display=1, b, point = 0;
 	char y;
 	deck = new int*[4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int i = 0;
+	animation();
+	Sleep(1000);
 	do
 	{
 		do
 		{
-			cout << "=================================================== POKER ==============================================================" << endl;
-			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
-			cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+			system("cls");
+			SetColor(11);
+			poker();
+			SetColor(15);
+			cout << "=================================================";
+			SetColor(13);
+			cout << "Kha Vinh Dat";
+			SetColor(15);
+			cout << "========================================================== " << endl;
+			cout << "================================================";
+			SetColor(14);
+			cout << "Nguyen Quoc Su";
+			SetColor(15);
+			cout <<"========================================================= " << endl;
 			cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 			cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
+
+			ShowCur(0);
 			cout << "\t\t\t\t\t  ==============================" << endl;
-			cout << "\t\t\t\t\t  | (1) create Hand Test       |" << endl;
-			cout << "\t\t\t\t\t  | (2) Play with 1 player     |" << endl;
-			cout << "\t\t\t\t\t  | (3) Play with n player     |" << endl;
-			cout << "\t\t\t\t\t  | (4) Play with Dealer       |" << endl;
-			cout << "\t\t\t\t\t  | (5) Quit                   |"<< endl;
+			cout << "\t\t\t\t\t  |     Create Hand Test       |" << endl;
+			cout << "\t\t\t\t\t  |     Play with 1 player     |" << endl;
+			cout << "\t\t\t\t\t  |     Play with n player     |" << endl;
+			cout << "\t\t\t\t\t  |     Play with Dealer       |" << endl;
+			cout << "\t\t\t\t\t  |     Quit                   |"<< endl;
 			cout << "\t\t\t\t\t  ==============================" << endl;
-			cin >> display;
+			choice(display);
+			Beep(523, 100);
 			switch (display)
 			{
 			case 1:
@@ -44,19 +62,22 @@ int main()
 				do
 				{
 					system("cls");
-					cout << "=================================================== POKER ==============================================================" << endl;
-					cout << "=================================================Kha Vinh Dat===========================================================" << endl;
-					cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+					SetColor(11);
+					poker();
+					SetColor(15);
+					cout << "=========================================================================================================\n";
+					cout << "=========================================================================================================\n";
+				
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
-					
 					khoitao(a, deck);
-					output(a);
+					printCardsShuffling(a);
 					createHandTest(a);
 					cout << endl;
 					cout << "\t\t\t  =================================" << endl;
 					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
 					cout << "\t\t\t  =================================" << endl;
+					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -66,21 +87,24 @@ int main()
 				do
 				{
 					system("cls");
-					cout << "=================================================== POKER ==============================================================" << endl;
-					cout << "=================================================Kha Vinh Dat===========================================================" << endl;
-					cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
+					SetColor(11);
+					poker();
+					SetColor(15);
+					cout << "======================================================================================================================" << endl;
+					cout << "======================================================================================================================" << endl;
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					//Chơi 1 mình ( so lonely :(((((( )
 					khoitao(a, deck);
 					shuffleCards(deck);
 					sort(a, deck);
-					dealingforHand(a, Player[0]);
+					dealingForHand(a, Player[0]);
 					cout << endl;
 
 					cout << "\t\t\t  =================================" << endl;
 					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
 					cout << "\t\t\t  =================================" << endl;
+					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -90,6 +114,11 @@ int main()
 				do
 				{
 					system("cls");
+					SetColor(11);
+					poker();
+					SetColor(15);
+					cout << "======================================================================================================================" << endl;
+					cout << "======================================================================================================================" << endl;
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					i = 1;
@@ -134,6 +163,7 @@ int main()
 					cout << "\t\t\t  =================================" << endl;
 					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
 					cout << "\t\t\t  =================================" << endl;
+					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -144,6 +174,11 @@ int main()
 					do
 					{
 						system("cls");
+						SetColor(11);
+						poker();
+						SetColor(15);
+						cout << "======================================================================================================================" << endl;
+						cout << "======================================================================================================================" << endl;
 						cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 						cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 						cout << "Input the level of game: " << endl;
@@ -153,7 +188,6 @@ int main()
 						cin >> level;
 					} while (level != 1 && level != 2 && level != 3);
 					system("cls");
-					int display_4;
 
 					khoitao(a, deck);
 
@@ -161,6 +195,7 @@ int main()
 					sort(a, deck);
 
 					int m;
+					ShowCur(1);
 					do
 					{
 						cout << "\t ===============================" << endl;
@@ -182,16 +217,22 @@ int main()
 
 			if (display == 5)
 			{
+				system("cls");
+				SetColor(15);
 				cout << "=========================================Thank you and see you again!!!================================================= ";
 				break;
 			}
 			system("cls");
-			cout << "=================================================== POKER ==============================================================" << endl;
-			cout << "=================================================Kha Vinh Dat===========================================================" << endl;
-			cout << "=============================================== Nguyen Quoc Su =========================================================" << endl;
-			cout << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-			cout << " - Do you want go to menu ? (y/n)" << endl;
-			cout << "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+			SetColor(11);
+			poker();
+			SetColor(15);
+			cout << "======================================================================================================================" << endl;
+			cout << "======================================================================================================================" << endl;
+			cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+			cout << " \t\t\t\t\t Do you want go to menu ? (y/n)" << endl;
+			cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+			GoTo(71, 11);
+			ShowCur(1);
 			cin >> y;
 
 			if (y != 'y')

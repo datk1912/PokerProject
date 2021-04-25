@@ -39,11 +39,17 @@ void deletee(int** deck)
 	delete[] deck;
 }
 
-void output(Data a[])
+void printCardsShuffling(Data a[])
 {
-	for (int i = 0; i < 52; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		cout << a[i].s << " (" << a[i].P << ")" << "\0" << endl;
+		for (int j = 0; j < 13; j++)
+		{
+			cout << a[i * 13 + j].s << "-" << a[i * 13 + j].P << "\0";
+			if (i * 13 + j < 10) cout << " ";
+			cout << "|";
+		}
+		cout << endl;
 	}
 }
 
@@ -272,14 +278,15 @@ void printHand(Data a[])
 	cout << endl;
 }
 
-void dealingforHand(Data a[], int Player[5]) // chia bai cho 1 nguoi
+void dealingForHand(Data a[], int Player[5]) // chia bai cho 1 nguoi
 {
 	for (int i = 0; i < 5; i++)
 		Player[i] = a[i].P;
-	cout << "Bai cua ban:" << endl;
+	cout << "Your Cards: " << endl;
 	printHand(a);
 	int p = getStatusOfHand(Player);
-	cout << "Diem cua ban la : " << p << endl;
+	cout << "Your Point:  " << p << endl;
+	cout << "the Highest Card: " << number[getHighestCard(Player) % 13] << suits[getHighestCard(Player) / 13] << endl;
 
 }
 
@@ -304,12 +311,14 @@ void createHandTest(Data a[]) // chon 5 la de kiem tra
 		}
 
 
-	cout << "Bai cua ban:" << endl;
+	cout << "Your Cards: " << endl;
 	for (int i = 0; i < 5; i++)
 		cout << a[t[i]].s << " ";
 	cout << endl;
 	int point = getStatusOfHand(t);
-	cout << "Diem cua ban la : " << point << endl;
+	cout << "Your Point: " << point << endl;
+	cout << "The Highest Card: " << number[getHighestCard(t) % 13] << suits[getHighestCard(t) / 13] << endl;
+
 }
 
 
@@ -374,7 +383,7 @@ int getHighestCard(int Player[5])
 	int max = 0;
 	for (int i = 0; i < 5; i++)
 	{
-		if (Player[i] % 13 < max) max = Player[i];
+		if (Player[i] % 13 > max % 13) max = Player[i];
 	}
 	return max;
 }
@@ -468,4 +477,232 @@ void dealer(Data a[], int Dealer[8], int Player[5][8], int n,int level)
 		}
 		cout << endl;
 		
+}
+
+void poker()
+{
+	cout << "\t\t\t\t" << " ******" << "   " << "   *****" << "     " << "**   **" << "  " << "*******" << "  " << "******" << endl;
+	cout << "\t\t\t\t" << "**    **" << "  " << " **     **" << "   " << "**  **" << "   " << "**" << "       " << "**   **" << endl;
+	cout << "\t\t\t\t" << "**    **" << "  " << "**       **" << "  " << "** **" << "    " << "**" << "       " << "**   **" << endl;
+	cout << "\t\t\t\t" << "******" << "    " << "**       **" << "  " << "****" << "     " << "*******" << "  " << "******" << endl;
+	cout << "\t\t\t\t" << "**" << "        " << "**       **" << "  " << "****" << "     " << "*******" << "  " << "******" << endl;
+	cout << "\t\t\t\t" << "**" << "        " << "**       **" << "  " << "** **" << "    " << "**" << "       " << "**  **" << endl;
+	cout << "\t\t\t\t" << "**" << "        " << " **     **" << "   " << "**  **" << "   " << "**" << "       " << "**   **" << endl;
+	cout << "\t\t\t\t" << "**" << "        " << "   *****" << "     " << "**   **" << "  " << "*******" << "  " << "**    **" << endl;
+}
+
+void P()
+{
+	cout << "\t\t\t\t\t\t" << " ******" << endl;
+	cout << "\t\t\t\t\t\t" << "**    **" << endl;
+	cout << "\t\t\t\t\t\t" << "**    **" << endl;
+	cout << "\t\t\t\t\t\t" << "******" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+}
+
+void O()
+{
+	cout << "\t\t\t\t\t" << "         ***** " << endl;
+	cout << "\t\t\t\t\t" << "       **     **" << endl;
+	cout << "\t\t\t\t\t" << "      **       **" << endl;
+	cout << "\t\t\t\t\t" << "      **       **" << endl;
+	cout << "\t\t\t\t\t" << "      **       **" << endl;
+	cout << "\t\t\t\t\t" << "      **       **" << endl;
+	cout << "\t\t\t\t\t" << "       **     **" << endl;
+	cout << "\t\t\t\t\t" << "         *****  " << endl;
+}
+
+void K()
+{
+	cout << "\t\t\t\t\t\t" << "**   **" << endl;
+	cout << "\t\t\t\t\t\t" << "**  **" << endl;
+	cout << "\t\t\t\t\t\t" << "** **" << endl;
+	cout << "\t\t\t\t\t\t" << "****" << endl;
+	cout << "\t\t\t\t\t\t" << "****" << endl;
+	cout << "\t\t\t\t\t\t" << "** **" << endl;
+	cout << "\t\t\t\t\t\t" << "**  **" << endl;
+	cout << "\t\t\t\t\t\t" << "**   **" << endl;
+}
+
+void E()
+{
+	cout << "\t\t\t\t\t\t" << "*******" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "*******" << endl;
+	cout << "\t\t\t\t\t\t" << "*******" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "**" << endl;
+	cout << "\t\t\t\t\t\t" << "*******" << endl;
+}
+
+void R()
+{
+	cout << "\t\t\t\t\t\t" << "******" << endl;
+	cout << "\t\t\t\t\t\t" << "**   **" << endl;
+	cout << "\t\t\t\t\t\t" << "**   **" << endl;
+	cout << "\t\t\t\t\t\t" << "******" << endl;
+	cout << "\t\t\t\t\t\t" << "******" << endl;
+	cout << "\t\t\t\t\t\t" << "**  **" << endl;
+	cout << "\t\t\t\t\t\t" << "**   **" << endl;
+	cout << "\t\t\t\t\t\t" << "**    **" << endl;
+}
+
+void animation()
+{
+	int k = 500;
+	for (int i = 0; i < 25; i++)
+	{
+		k -= 20;
+		switch (i % 5)
+		{
+		case 0:
+		{
+			SetColor(rand() % 14+1);
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			P();
+			Sleep(k);
+		}
+		break;
+		case 1:
+		{
+			SetColor(rand() % 14 + 1);
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			O();
+			Sleep(k);
+		}
+		break;
+		case 2:
+		{
+			SetColor(rand() % 14 + 1);
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			K();
+			Sleep(k);
+		}
+		break;
+		case 3:
+		{
+			SetColor(rand() % 14 + 1);
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			E();
+			Sleep(k);
+		}
+		break;
+		case 4:
+		{
+			SetColor(rand() % 14 + 1);
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			R();
+			Sleep(k);
+		}
+		break;
+		}
+	}
+	system("cls");
+	cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+	poker();
+}
+
+void move(int x)
+{
+	if (x == 1) cout << "Create Hand Test";
+	else if (x == 2) cout << "Play with 1 player";
+	else if (x == 3) cout << "Play with n player";
+	else if (x == 4) cout << "Play with Dealer";
+	else if (x == 5) cout << "Quit";
+}
+
+void choice(int &i)
+{
+	char k = 0;
+	while (k != 13)
+	if (_kbhit())
+	{
+		k = _getch();
+		if (k == 80)
+		{
+			Beep(523, 100);
+			SetColor(15);
+			GoTo(46, i + 13);
+			cout << "  ";
+			move(i);
+			i++;
+			if (i > 5) i = 1;
+			GoTo(46, i+13);
+			SetColor(5);
+			cout << "->";
+			SetColor(3);
+			move(i);
+			
+		}
+		else if (k == 72)
+		{
+			Beep(523, 100);
+			SetColor(15);
+			GoTo(46, i + 13);
+			cout << "  ";
+			move(i);
+			i--;
+			if (i < 1) i = 5;
+			GoTo(46, i + 13);
+			SetColor(5);
+			cout << "->";
+			SetColor(3);
+			move(i);
+		}
+	}
+	
+}
+
+void SetColor(WORD color)
+{
+	HANDLE hConsoleOutput;
+	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
+	GetConsoleScreenBufferInfo(hConsoleOutput, &screen_buffer_info);
+
+	WORD wAttributes = screen_buffer_info.wAttributes;
+	color &= 0x000f;
+	wAttributes &= 0xfff0;
+	wAttributes |= color;
+
+	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+}
+
+void DisableResizeWindow()
+{
+	HWND hWnd = GetConsoleWindow();
+	SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
+}
+
+void ShowScrollbar(BOOL Show)
+{
+	HWND hWnd = GetConsoleWindow();
+	ShowScrollBar(hWnd, SB_BOTH, Show);
+}
+
+void GoTo(SHORT posX, SHORT posY)
+{
+	HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD Position;
+	Position.X = posX;
+	Position.Y = posY;
+
+	SetConsoleCursorPosition(hStdout, Position);
+}
+
+void ShowCur(bool CursorVisibility)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
+	SetConsoleCursorInfo(handle, &cursor);
 }
