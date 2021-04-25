@@ -1,4 +1,4 @@
-﻿#include"typecard.h"
+#include"typecard.h"
 
 int Player[10][5];
 int PlayerD[5][8];
@@ -13,12 +13,12 @@ int main()
 	ShowCur(0);
 	srand((int)time(0));
 	int** deck;
-	deck = new int*[4];
+	deck = new int* [4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
-	int display=1, b, point = 0;
+	int display = 1, b, point = 0;
 	char y;
-	deck = new int*[4];
+	deck = new int* [4];
 	for (int i = 0; i < 4; i++)
 		deck[i] = new int[13];
 	int i = 0;
@@ -29,8 +29,7 @@ int main()
 		do
 		{
 			system("cls");
-			SetColor(11);
-			poker();
+			Poker();
 			SetColor(15);
 			cout << "=================================================";
 			SetColor(13);
@@ -41,7 +40,7 @@ int main()
 			SetColor(14);
 			cout << "Nguyen Quoc Su";
 			SetColor(15);
-			cout <<"========================================================= " << endl;
+			cout << "========================================================= " << endl;
 			cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 			cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 
@@ -51,7 +50,7 @@ int main()
 			cout << "\t\t\t\t\t  |     Play with 1 player     |" << endl;
 			cout << "\t\t\t\t\t  |     Play with n player     |" << endl;
 			cout << "\t\t\t\t\t  |     Play with Dealer       |" << endl;
-			cout << "\t\t\t\t\t  |     Quit                   |"<< endl;
+			cout << "\t\t\t\t\t  |     Quit                   |" << endl;
 			cout << "\t\t\t\t\t  ==============================" << endl;
 			choice(display);
 			Beep(523, 100);
@@ -62,21 +61,20 @@ int main()
 				do
 				{
 					system("cls");
-					SetColor(11);
-					poker();
+					Poker();
 					SetColor(15);
-					cout << "=========================================================================================================\n";
-					cout << "=========================================================================================================\n";
-				
+					cout << "=======================================================================================================================\n";
+					cout << "=======================================================================================================================\n";
+
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					khoitao(a, deck);
 					printCardsShuffling(a);
 					createHandTest(a);
 					cout << endl;
-					cout << "\t\t\t  =================================" << endl;
-					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
-					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
 					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
@@ -87,23 +85,21 @@ int main()
 				do
 				{
 					system("cls");
-					SetColor(11);
-					poker();
+					Poker();
 					SetColor(15);
-					cout << "======================================================================================================================" << endl;
-					cout << "======================================================================================================================" << endl;
+					cout << "=======================================================================================================================" << endl;
+					cout << "=======================================================================================================================" << endl;
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
-					//Chơi 1 mình ( so lonely :(((((( )
 					khoitao(a, deck);
 					shuffleCards(deck);
 					sort(a, deck);
 					dealingForHand(a, Player[0]);
 					cout << endl;
 
-					cout << "\t\t\t  =================================" << endl;
-					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
-					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
 					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
@@ -114,11 +110,10 @@ int main()
 				do
 				{
 					system("cls");
-					SetColor(11);
-					poker();
+					Poker();
 					SetColor(15);
-					cout << "======================================================================================================================" << endl;
-					cout << "======================================================================================================================" << endl;
+					cout << "=======================================================================================================================" << endl;
+					cout << "=======================================================================================================================" << endl;
 					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					i = 1;
@@ -128,7 +123,7 @@ int main()
 						cin >> b;
 					} while (b < 0);
 
-					int *ans;
+					int* ans;
 					ans = new int[10];
 					int am;
 					for (int j = 0; j < 10; j++)
@@ -160,9 +155,9 @@ int main()
 
 					delete[] ans;
 
-					cout << "\t\t\t  =================================" << endl;
-					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
-					cout << "\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
 					ShowCur(1);
 					cin >> y;
 				} while (y == 'y');
@@ -174,11 +169,10 @@ int main()
 					do
 					{
 						system("cls");
-						SetColor(11);
-						poker();
+						Poker();
 						SetColor(15);
-						cout << "======================================================================================================================" << endl;
-						cout << "======================================================================================================================" << endl;
+						cout << "=======================================================================================================================" << endl;
+						cout << "=======================================================================================================================" << endl;
 						cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
 						cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 						cout << "Input the level of game: " << endl;
@@ -196,18 +190,25 @@ int main()
 
 					int m;
 					ShowCur(1);
+					system("cls");
+					Poker();
+					SetColor(15);
+					cout << "=======================================================================================================================" << endl;
+					cout << "=======================================================================================================================" << endl;
+					cout << "(0)High Card      (1)Pair         (2)2 Pairs           (3)Three Of A Kind       (4)Straight" << endl;
+					cout << "(5)Flush          (6)FullHouse    (7)Four Of A Kind    (8)StraightFlush" << endl << endl;
 					do
 					{
-						cout << "\t ===============================" << endl;
-						cout << "\t  Enter the number players(1-5): " << endl; 
-						cout << "\t ===============================" << endl;
+						cout << "\t\t\t\t\t   ===============================" << endl;
+						cout << "\t\t\t\t\t    Enter the number players(1-5): " << endl;
+						cout << "\t\t\t\t\t   ===============================" << endl;
 						cin >> m;
 					} while (m > 5 || m < 1);
 					system("cls");
-					dealer(a, Dealer, PlayerD, m+1,level);
-					cout << "\t\t\t  =================================" << endl;
-					cout << "\t\t\t  | Do you want play again? (y/n) |" << endl;
-					cout << "\t\t\t  =================================" << endl;
+					dealer(a, Dealer, PlayerD, m + 1, level);
+					cout << "\t\t\t\t\t  =================================" << endl;
+					cout << "\t\t\t\t\t  | Do you want play again? (y/n) |" << endl;
+					cout << "\t\t\t\t\t  =================================" << endl;
 					cin >> y;
 				} while (y == 'y');
 				break;
@@ -215,37 +216,40 @@ int main()
 			}
 		} while (display < 1 || display > 5);
 
-			if (display == 5)
-			{
-				system("cls");
-				SetColor(15);
-				cout << "=========================================Thank you and see you again!!!================================================= ";
-				break;
-			}
+		if (display == 5)
+		{
 			system("cls");
-			SetColor(11);
-			poker();
 			SetColor(15);
-			cout << "======================================================================================================================" << endl;
-			cout << "======================================================================================================================" << endl;
-			cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-			cout << " \t\t\t\t\t Do you want go to menu ? (y/n)" << endl;
-			cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-			GoTo(71, 11);
-			ShowCur(1);
-			cin >> y;
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			cout << "=========================================Thank you and see you again!!!================================================= ";
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			break;
+		}
+		system("cls");
+		Poker();
+		SetColor(15);
+		cout << "========================================================================================================================" << endl;
+		cout << "========================================================================================================================" << endl;
+		cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+		cout << " \t\t\t\t\t Do you want go to menu ? (y/n)" << endl;
+		cout << " \t\t\t\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+		GoTo(71, 11);
+		ShowCur(1);
+		cin >> y;
 
-			if (y != 'y')
-			{
-				system("cls");
-				cout << "=========================================Thank you and see you again!!!================================================= ";
-			}
-			else
-				system("cls");
-		
+		if (y != 'y')
+		{
+			system("cls");
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+			cout << "==========================================Thank you and see you again!!!================================================= ";
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
+		}
+		else
+			system("cls");
+
 	} while (y == 'y');
 
 	deletee(deck);
-	
+
 	return 0;
 }
