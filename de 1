@@ -5,3 +5,11 @@ void addHead(List& L, SinhVien sv)
 	temp->p_next = L.p_head;
 	L.p_head = temp;
 }
+
+void removeTail(List& L)
+{
+	Node *temp = L.p_head;
+	while (temp->p_next == NULL) temp = temp->p_next;
+	temp->p_next = NULL;
+	L.p_tail = temp;
+}
