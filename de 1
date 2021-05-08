@@ -1,0 +1,7 @@
+void addHead(List& L, SinhVien sv)
+{
+	Node *temp;
+	temp->data = sv;
+	temp->p_next = L.p_head;
+	L.p_head = temp;
+}
