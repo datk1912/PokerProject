@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+int UC(int n, int m, int k, int l)
+{
+	if (k == m || k == n)
+		return l;
+	if (n % k == 0 && m % k == 0)
+		return UC(n, m, k + 1, l + 1);
+	else
+		return UC(n, m, k + 1, l);
+}
+
+int main()
+{
+	int n,m;
+	cin >> n >> m;
+	cout << UC(n,m, 1, 1);
+}
