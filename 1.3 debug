@@ -1,0 +1,7 @@
+int count1(int n, int m) {
+	if (n == m) return 1;
+	if (n % m == 0 && n / m >= m) {
+		return 1 + count1(n, m + 1);
+	}
+	return count1(n, m + 1);
+}
