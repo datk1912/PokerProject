@@ -1,0 +1,29 @@
+int Sum(int a, int b, int A[])
+{
+	int sum = 0;
+	for (int i = a; i <= b; i++)
+	{
+		sum += A[i];
+	}
+	return sum;
+}
+
+int** listSegments(int A[], int n, int S, int& result_size)
+{
+	int **B = new int *[n * 3];
+	int k = 0;
+	for (int i = 0; i < n * 3; i++)
+		B[i] = new int[2];
+	for (int i = 0; i < n - 1;i++)
+		for (int j = i + 1; j < n; j++)
+		{
+			int sum = Sum(i, j, A);
+			if (sum == S*(j - i + 1))
+			{
+				B[result_size][0] = i;
+				B[result_size][1] = j;
+				result_size++;
+			}
+		}
+	return B;
+}
