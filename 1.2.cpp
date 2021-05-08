@@ -5,97 +5,135 @@
 
 using namespace std;
 
+
 struct NhanVien {
-    int id;
-    string name;
-    string home_town;
+	int id;
+	string name;
+	string home_town;
 };
 struct Node {
-    NhanVien data;
-    Node* p_next;
+	NhanVien data;
+	Node* p_next;
 };
 struct List {
-    Node* p_head;
-    Node* p_tail;
+	Node* p_head;
+	Node* p_tail;
 };
 
-Node* createNode(int id, string name, string home_town) {
-    Node* a = new Node;
-    (*a).data.id = id;
-    (*a).data.name = name;
-    (*a).data.home_town = home_town;
-    (*a).p_next = NULL;
-    return a;
-}
-void printList(List ds) {
-    Node* cur;
-    cur = ds.p_head;
-    while (cur != ds.p_tail) {
-        cout << cur->data.id << endl;
-        cout << cur->data.name << endl;
-        cout << cur->data.home_town << endl;
-        cur = cur->p_next;
-    }
-    cout << cur->data.id << endl;
-    cout << cur->data.name << endl;
-    cout << cur->data.home_town << endl;
-}
-void addBack(List &ds, Node* a) {
-    ds.p_tail->p_next = a;
-    ds.p_tail = a;
+
+
+Node* createNode(int id, string name, string home_town)
+{
+	Node* p = new Node;
+	(*p).data.id = id;
+	(*p).data.name = name;
+	(*p).data.home_town = home_town;
+	(*p).p_next = NULL;
+	return p;
 }
 
-void input(int &n, List& ds) {
-    fstream file;
-    int id;
-    string name;
-    string homeTown;
-    file.open("Dulieu.txt", ios::in);
-    if (file) {
-        file >> n;
-        file.ignore();
-        for (int i = 0;i < n;i++){
-            string data;
-            getline(file, data,'_');
-            stringstream ss(data);
-            ss >> id;
-            getline(file, data, '_');
-            name = data;
-            getline(file, data, '\n');
-            homeTown = data;
-            Node* nNode = createNode(id, name, homeTown);
-            if (i == 0) {
-                ds.p_head = nNode;
-                ds.p_tail = nNode;
-            }
-            else addBack(ds, nNode);
-        }
-    }
-    else {
-        cout << "Can't open file Dulieu.txt";
-        return;
-    }
+void addTail(List& L, NhanVien nv)
+{
+	Node* p = new Node;
+	p = createNode(nv.id, nv.name, nv.home_town);
+	L.p_tail->p_next = p;
+	L.p_tail = p;
 }
-void delFromId(List &ds, int id) {
-    while (ds.p_head->data.id == id) ds.p_head = ds.p_head->p_next;
-    Node* cur;
-    cur = ds.p_head;
-    Node* preNode = ds.p_head;
-    while (cur != ds.p_tail) {
-        if (cur->data.id == id) preNode->p_next = cur->p_next;
-        preNode = cur;
-        cur = cur->p_next;
-    }
-    if (ds.p_tail->data.id == id) {
-        ds.p_tail = preNode;
-        preNode->p_next = NULL;
-    }
+
+void readData(string filename, List& L)
+{
+	fstream fs;
+	fs.open(filename, ios::in);
+	if (fs)
+	{
+		int n;
+		int id;
+		string name, town;
+		fs >> n;
+
+		for (int i = 0; i < n; i++)
+		{
+			string data;
+			getline(fs, data, '_');
+			stringstream ss(data);
+			ss >> id;
+
+			getline(fs, data, '_');
+			name = data;
+
+			getline(fs, data, '\n');
+			town = data;
+
+			Node* nNode = createNode(id, name, town);
+			if (i == 0)
+			{
+				L.p_head = nNode;
+				L.p_tail = nNode;
+			}
+			else addTail(L, nNode->data);
+		}
+	}
+	else cout << "can't open file to read!";
 }
-int main() {
-    int n;
-    List ds;
-    input(n, ds);
-    delFromId(ds, 13);
-    printList(ds);
-    return 1;
+
+void removeById(List& L, int id)
+{
+	Node* index = L.p_head;
+	Node* temp = new Node;
+	if (id == L.p_head->data.id)
+	{
+		temp = L.p_head;
+		L.p_head = L.p_head->p_next;
+		delete temp;
+	}
+	else
+		while (index->p_next != L.p_tail)
+			if (index->p_next->data.id == id)
+			{
+				temp = index->p_next;
+				index->p_next = index->p_next->p_next;
+				delete temp;
+				break;
+			}
+	if (id == L.p_tail->data.id)
+	{
+		temp = L.p_tail;
+		index->p_next = NULL;
+		L.p_tail = index;
+		delete temp;
+	}
+
+}
+
+void print(List L)
+{
+	Node *index = L.p_head;
+	fstream fs;
+	fs.open("123.txt", ios::out);
+	while (index != NULL)
+	{
+		fs << "id: " << index->data.id << " Name: " << index->data.name << " HomeTown: " << index->data.home_town << endl;
+		index = index->p_next;
+	}
+
+}
+
+int main()
+{
+	List L;
+	L.p_head = NULL;
+	L.p_tail = NULL;
+	string filename;
+	cout << "input the file name to read: ";
+	cin >> filename;
+
+	readData(filename, L);
+
+	int id;
+	cout << "input the id to delete: ";
+	cin >> id;
+	removeById(L, id);
+
+	print(L);
+
 }
